@@ -4,7 +4,9 @@ cmake_minimum_required(VERSION 3.11-3.18)
 
 project(lox)
 
-add_library(lox src/hello.c)
+file(GLOB SOURCES "src/*.c")
+
+add_library(lox src/chunk.c ${SOURCES})
 
 # PUBLIC needed to make both hello.h and hello library available elsewhere in project
 target_include_directories(${PROJECT_NAME}
