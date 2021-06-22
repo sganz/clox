@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "common.h"
-#include "compiler.h";
+#include "compiler.h"
 #include "debug.h"
 #include "vm.h"
 
@@ -76,7 +76,7 @@ static InterpretResult run() {
 #undef BINARY_OP
 }
 
-InterpretResult interpret(const char* soruce) {
+InterpretResult interpret(const char* source) {
     compile(source);
     return INTERPRET_OK;
 }

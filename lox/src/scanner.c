@@ -29,7 +29,7 @@ static bool isDigit(char c) {
 }
 
 static bool isAtEnd() {
-    return *scanner.current = '\0';
+    return *scanner.current == '\0';
 }
 
 static char advance() {
@@ -41,7 +41,7 @@ static char peek() {
     return *scanner.current;
 }
 
-static peekNext() {
+static char peekNext() {
     if(isAtEnd()) return '\0';
     return scanner.current[1];
 }
@@ -152,7 +152,7 @@ static Token number() {
     // Look for fractional part.
     if(peek() == '.' && isDigit(peekNext())) {
         // consume the "."
-        advance()
+        advance();
 
         while(isDigit(peek())) advance();
     }
