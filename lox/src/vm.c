@@ -400,6 +400,13 @@ static InterpretResult run() {
                     double b = AS_NUMBER(pop());
                     double a = AS_NUMBER(pop());
                     push(NUMBER_VAL(a + b));
+                } else if(IS_STRING(peek(1)) && IS_NUMBER(peek(0))) {
+                    double b = AS_NUMBER(pop());
+                    char* buf = ALLOCATE(char, 8 + 1);
+                    snprintf(buf, 8, "%g", b);
+                    ObjString* num = takeString(buf, strlen(buf));
+                    push(OBJ_VAL(num));
+                    concatenate();
                 } else {
                     runtimeError(
                         "Operands must be two numbers or two strings.");
