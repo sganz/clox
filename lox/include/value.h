@@ -46,7 +46,7 @@ static inline double valueToNum(Value value) {
 
 static inline Value numToValue(double num) {
     Value value;
-    memcpy(&value, &num, suzeof(double));
+    memcpy(&value, &num, sizeof(double));
     return value;
 }
 
