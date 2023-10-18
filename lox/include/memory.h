@@ -12,12 +12,15 @@
 #define GROW_CAPACITY(capacity) \
     ((capacity) < 8 ? 8 : (capacity) * 2)
 
+// sjg - NQQ has the parameters of type and pointer swapped
 #define GROW_ARRAY(type, pointer, oldCount, newCount) \
     (type*)reallocate(pointer, sizeof(type) * (oldCount), \
         sizeof(type) * (newCount))
 
 #define FREE_ARRAY(type, pointer, oldCount) \
     reallocate(pointer, sizeof(type) * (oldCount), 0)
+
+// sjg - NQQ uses a different parameter name for pointer, and handles errors differently
 
 void* reallocate(void* pointer, size_t oldSize, size_t newSize);
 void markObject(Obj* object);

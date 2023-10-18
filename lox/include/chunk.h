@@ -1,6 +1,10 @@
 #ifndef clox_chunk_h
 #define clox_chunk_h
 
+/*
+* sjg - updated with NQQ enums, each marked
+*/
+
 #include "common.h"
 #include "value.h"
 
@@ -10,6 +14,7 @@ typedef enum {
     OP_TRUE,
     OP_FALSE,
     OP_POP,
+    OP_POP_N,   // NQQ
     OP_GET_LOCAL,
     OP_SET_LOCAL,
     OP_GET_GLOBAL,
@@ -27,9 +32,11 @@ typedef enum {
     OP_SUBTRACT,
     OP_MULTIPLY,
     OP_DIVIDE,
+    OP_MODULO,  // NQQ
     OP_NOT,
     OP_NEGATE,
-    OP_PRINT,
+    OP_POWER,   // NQQ
+    OP_PRINT,   // Might Remove and let native handle with params
     OP_JUMP,
     OP_JUMP_IF_FALSE,
     OP_LOOP,
@@ -38,6 +45,11 @@ typedef enum {
     OP_SUPER_INVOKE,
     OP_CLOSURE,
     OP_CLOSE_UPVALUE,
+    OP_BUILD_LIST,    // NQQ
+    OP_BUILD_MAP,    // NQQ
+    OP_INDEX_SUBSCR,    // NQQ
+    OP_STORE_SUBSCR,    // NQQ
+    OP_WIDE,    // NQQ
     OP_RETURN,
     OP_CLASS,
     OP_INHERIT,
