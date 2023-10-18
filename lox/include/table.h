@@ -5,8 +5,9 @@
 #include "value.h"
 
 typedef struct {
-    ObjString* key;
+    ObjString* key; // sjg - NQQ has this as a Value type, may not work for clox, but will see
     Value value;
+    // bool empty; // sjg - NQQ Only, this looks like a helper of sorts, see if needed due to NQQ
 } Entry;
 
 typedef struct {
@@ -17,6 +18,12 @@ typedef struct {
 
 void initTable(Table* table);
 void freeTable(Table* table);
+
+// sjg - anything with ObjString* type in NQQ has Value as the type, likely still looking
+// at the same data type, but might be less flexible as no Objects in NQQ
+// In looking at NQQ it may be that the hash can do more then just a 
+
+
 bool tableGet(Table* table, ObjString* key, Value* value);
 bool tableSet(Table* table, ObjString* key, Value value);
 bool tableDelete(Table* table, ObjString* key);

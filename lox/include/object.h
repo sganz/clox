@@ -91,8 +91,8 @@ typedef struct {
     NativeFn function;
 } ObjNative;
 
-
-// sjg - NQQ Note: hash is cached for strings because a) strings are immutable so the hash
+// sjg - NQQ 
+// Note: hash is cached for strings because a) strings are immutable so the hash
 // will never change b) string lookups are a very frequent action in Clox and
 // we want it to be as quick as possible.
 // MOST of the OBJ functions are prefixed as sObjStrin in NQQ
@@ -150,12 +150,13 @@ typedef struct {
     ObjClosure* method;
 } ObjBoundMethod;
 
-ObjBoundMethod* newBoundMethod(Value receiver, 
-    ObjClosure* method);
+// sjg - Next 2 not in NQQ
+ObjBoundMethod* newBoundMethod(Value receiver, ObjClosure* method);
 ObjClass* newClass(ObjString* name);
+ObjInstance* newInstance(ObjClass* klass);
+
 ObjClosure* newClosure(ObjFunction* function);
 ObjFunction* newFunction();
-ObjInstance* newInstance(ObjClass* klass);
 ObjNative* newNative(NativeFn function);
 ObjString* takeString(char* chars, int length);
 ObjUpvalue* newUpvalue(Value* slot);
@@ -164,7 +165,6 @@ ObjString* copyString(const char* chars, int length);
 // sjg - New from NQQ
 Value indexFromString(ObjString* string, int index);
 bool isValidStringIndex(ObjString* list, int index);
-ObjUpvalue* newUpvalue(Value* slot);
 ObjList* newList();
 void appendToList(ObjList* list, Value value);
 void storeToList(ObjList* list, int index, Value value);
@@ -178,8 +178,8 @@ static inline bool isObjType(Value value, ObjType type) {
     return IS_OBJ(value) && AS_OBJ(value)->type == type;
 }
 
-// sjg - New from NQQ
 static inline const char* stringFromObjType(ObjType type) {
     return OBJ_TYPE_STRINGS[type];
 }
+
 #endif

@@ -5,7 +5,12 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#define NAN_BOXING
+// sjg - NAN Boxing allows all simple data types to fit in a 64 bit work. This may not be helpful down the road
+// and likely why their is a distinct STRING type in clox vs, a string in NQQ as an object. NQQ does NOT use
+// NAN boxing, likely we wont either so expect some changes with STRINGS
+// 
+// #define NAN_BOXING
+
 // Print a disassembly of a programs code after compilation and before execution
 #define DEBUG_PRINT_CODE
 // Print the opcode and stack at the beginning of every loop through the VM

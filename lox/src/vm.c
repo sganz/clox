@@ -16,6 +16,24 @@ static Value clockNative(int argCount, Value* args) {
     return NUMBER_VAL((double)clock() / CLOCKS_PER_SEC);
 }
 
+// sjg -
+// Quick test of a native function call. This will take the args and dump them
+// using the printValue() function that knows how to deal with different data types.
+static Value __dumpNative(int argCount, Value* args) {
+    printf("__dumpNative() : argCount %d\n", argCount);
+    if (argCount > 0) {
+        printf("-----------------------------\n");
+        for (int i = 0; i < argCount; i++) {
+            printValue(args[i]);
+            printf("\n");
+        }
+    }
+    printf("-----------------------------\n");
+    printf("size_t = %d\n", sizeof(size_t));
+    printf("-----------------------------\n");
+    return BOOL_VAL(1); // sjg - just return true I guess for now
+}
+
 static void resetStack() {
     vm.stackTop = vm.stack;
     vm.frameCount = 0;
@@ -70,6 +88,10 @@ void initVM() {
     vm.initString = copyString("init", 4);
 
     defineNative("clock", clockNative);
+
+    // Added sjg 
+
+    defineNative("__dump", __dumpNative);
 }
 
 void freeVM() {

@@ -5,6 +5,9 @@
 
 #include "common.h"
 
+// sjg - NQQ has these as sObj Obj; 
+// Not sure I understand this as Obj is declared a struct, need to look up
+// what this really means... TODO: Figure if needed
 typedef struct Obj Obj;
 typedef struct ObjString ObjString;
 
@@ -56,8 +59,8 @@ typedef enum {
     VAL_BOOL,
     VAL_NIL,
     VAL_NUMBER,
-    VAL_OBJ,
-    VAL_STRING
+    VAL_OBJ, // 1st Class: String, Function, Native, List
+    VAL_STRING  // sjg - need to see if better to go the NQQ route for stings. Might be removed
 } ValueType;
 
 typedef struct {
@@ -74,14 +77,16 @@ typedef struct {
 #define IS_NUMBER(value)  ((value).type == VAL_NUMBER)
 #define IS_OBJ(value)     ((value).type == VAL_OBJ)
 
-#define AS_OBJ(value)     ((value).as.obj)
+// Value -> Raw C value
 #define AS_BOOL(value)    ((value).as.boolean)
 #define AS_NUMBER(value)  ((value).as.number)
+#define AS_OBJ(value)     ((value).as.obj)
 
-#define BOOL_VAL(value)   ((Value){VAL_BOOL, {.boolean = value}})
-#define NIL_VAL           ((Value){VAL_NIL, {.number = 0}})
-#define NUMBER_VAL(value) ((Value){VAL_NUMBER, {.number = value}})
-#define OBJ_VAL(object)   ((Value){VAL_OBJ, {.obj = (Obj*)object}})
+// Raw C value -> Value
+#define BOOL_VAL(value)   ((Value){ VAL_BOOL, { .boolean = value } })
+#define NIL_VAL           ((Value){ VAL_NIL, { .number = 0 } })
+#define NUMBER_VAL(value) ((Value){ VAL_NUMBER, { .number = value } })
+#define OBJ_VAL(object)   ((Value){ VAL_OBJ, { .obj = (Obj*)object } })
 
 #endif
 
@@ -98,4 +103,3 @@ void freeValueArray(ValueArray* array);
 void printValue(Value value);
 
 #endif
-
